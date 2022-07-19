@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task</title>
+    <style>
+      
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: white;
+  font-size: 22px;
+  
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+#date{
+  font-style: italic ;
+}
+#price_box{
+  width: 130px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+  
+  border-radius: 15px
+}
+.card button:hover {
+  opacity: 0.7;
+}
+    </style>
+   
+  </head>
+  
+    <body>
+        {% if px  %}
+       
+        <form id="payment-form">
+            
+            <div class="card">
+                
+                <h1>The Global NFT Summit London 2022</h1>
+                
+                <p>etc.venues, 155 Bishopsgate, London, EC2M 3TQ</p>
+                <div id="date">
+                  July 22, 2022
+                </div>
+                <div id="price_box">
+                  <p class="price">{{px.price}} GBP</p>
+                </div>
+                
+                <p><button id="submit">BOOK</button></p>
+                
+              </div>
+            
+          </form>
+          {% endif %}
+      <script src="https://js.stripe.com/v3/"></script>
+      
+      <script>
+
+        const buy_now_button = document.querySelector('#submit')
+        var stripe = Stripe('pk_test_51LMakFBUxFJFP9RoJzIBJ5dJuiOGTbBVA182IzMu8w9KfCFohOO1QHJsWK8iAkpjGU3EJQ2gWA73Syw3knRWDf5f00TvMauAqp');
+        buy_now_button.addEventListener('click',event=>{
+        stripe.redirectToCheckout({
+            sessionId: '{{session_id}}'
+
+        }).then(function (result){
+
+        });})
+      </script>
+      
+    </body>
+  </html>
